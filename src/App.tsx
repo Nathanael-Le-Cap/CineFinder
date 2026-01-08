@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Film } from 'lucide-react';
 import Home from './pages/Home';
+import MovieDetail from './pages/MovieDetail';
 import type { Movie } from './types';
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home favorites={favorites} toggleFavorite={toggleFavorite} />} />
+            <Route path="/movie/:id" element={<MovieDetail />} />
           </Routes>
         </main>
       </div>

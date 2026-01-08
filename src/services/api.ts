@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { MovieResponse } from '../types';
+import type { MovieResponse, MovieDetails } from '../types';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -17,7 +17,7 @@ export const getPopularMovies = async () => {
     const response = await api.get<MovieResponse>('/movie/popular');
     return response.data.results;
   } catch (error) {
-    console.error("Erreur récup films", error);
+    console.error("Erreur lors de la récupération des films", error);
     return [];
   }
 };
@@ -29,7 +29,21 @@ export const searchMovies = async (query: string) => {
     });
     return response.data.results;
   } catch (error) {
-    console.error("Erreur recherche", error);
+    console.error("Erreur lors de la recherche", error);
     return [];
+  }
+};
+
+export const getMovieDetails = async (id: string) => {
+  try {
+    const response = await api.get<MovieDetails>(`/movie/${id}`, {
+      params: {
+        append_to_response: 'credits',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Erreur détails film", error);
+    return null;
   }
 };
