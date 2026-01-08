@@ -38,7 +38,8 @@ export const getMovieDetails = async (id: string) => {
   try {
     const response = await api.get<MovieDetails>(`/movie/${id}`, {
       params: {
-        append_to_response: 'credits',
+        // C'est ici qu'on demande les acteurs ET les vidéos en une seule fois
+        append_to_response: 'credits,videos',
       },
     });
     return response.data;
